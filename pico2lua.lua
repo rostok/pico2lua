@@ -18,7 +18,7 @@ filename = filename:gsub(".lua","_patched.lua")
 for k, v in pairs(arg) do
 	if v=="--noenv" or v=="-ne" then
 	    print("removing _ENV")
-		loaded_code = loaded_code:gsub("local _ENV = _ENV","")
+		loaded_code = loaded_code:gsub("local _ENV = _ENV \n","")
 		loaded_code = loaded_code:gsub("_ENV%.","")
 	end
 	if v=="-o" then
@@ -26,5 +26,6 @@ for k, v in pairs(arg) do
 		filename = arg[#arg]
 	end
 end
+if loaded_code:sub(1,2)=="\n\n" then loaded_code=loaded_code:sub(3) end
 
 api.writeFile(filename,loaded_code)
