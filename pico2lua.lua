@@ -1,3 +1,7 @@
+local scriptPath = debug.getinfo(1, "S").source:sub(2)
+local scriptDir = scriptPath:match("(.*[/\\])")
+package.path = package.path .. ";" .. scriptDir .. "?.lua"
+
 local api = require("love/api")
 local cart = require("love/cart")
 log = print
